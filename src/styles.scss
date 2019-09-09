@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+.converter{
+  padding: 10px 50px 0;
+}
+.currency-selects{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  mat-form-field{
+    padding: 0 5px;
+  }
+}
+
+.graph-message{
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message{
+  display: flex;
+  align-items: center;
+}

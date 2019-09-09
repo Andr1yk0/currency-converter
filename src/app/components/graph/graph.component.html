@@ -1,0 +1,9 @@
+<div class="graph">
+  <div class="graph-message">
+    <div class="message">
+      <mat-icon color="primary" *ngIf="!isError">info_outline</mat-icon>
+      <mat-icon color="warn" *ngIf="isError">error_outline</mat-icon>
+      <span>{{message}}</span>
+    </div>
+  </div>
+</div>
