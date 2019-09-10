@@ -4,7 +4,8 @@ import {AppState} from "../../store/state/app.state";
 import {selectConverterData} from "../../store/selectors/converter.selectors";
 import {ConverterState} from "../../store/state/converter.state";
 import {CurrencyService} from "../../services/currency.service";
-import {Chart} from "chart.js"
+import {Chart} from "chart.js";
+import {HistoryResponse} from "../../models/history-response.interface"
 
 @Component({
   selector: 'app-graph',
