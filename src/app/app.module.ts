@@ -14,6 +14,21 @@ import { AppEffects } from './app.effects';
 import {HttpClientModule} from "@angular/common/http";
 import { ConverterComponent } from './components/converter/converter.component';
 import { GraphComponent } from './components/graph/graph.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {FormsModule} from "@angular/forms";
+
+const CUSTOM_DATE_FORMATS = {
+  parse: {
+    dateInput: 'YYYY-MM-DD',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -36,9 +51,14 @@ import { GraphComponent } from './components/graph/graph.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,8 +8,8 @@ export interface ConverterState {
 }
 
 export const initialConverterState: ConverterState = {
-  currencyFrom: null,
-  currencyTo: null,
+  currencyFrom: {code: 'USD'},
+  currencyTo: {code: 'GBP'},
   amount: null,
   latestDate: null
 };

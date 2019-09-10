@@ -15,10 +15,8 @@
     </button>
   </div>
   <mat-form-field>
-    <mat-select placeholder="Currency to">
       <mat-select placeholder="Currency to" [value]="currencyTo$|async" (selectionChange)="onSelectCurrencyTo($event)">
         <mat-option *ngFor="let currency of currencies" [value]="currency">{{currency.code}}</mat-option>
-      </mat-select>
     </mat-select>
   </mat-form-field>
   <mat-form-field>

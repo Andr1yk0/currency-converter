@@ -8,7 +8,7 @@ import {selectConverterData, selectCurrencyFrom, selectCurrencyTo} from "../../s
 import {ConverterState} from "../../store/state/converter.state";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Currency} from "../../models/currency.model";
-import {RatesResponse} from "../../models/rates-response.model";
+import {RatesResponse} from "../../models/rates-response.interface";
 import {DeleteError, SetError} from "../../store/actions/app.actions";
 
 @Component({
