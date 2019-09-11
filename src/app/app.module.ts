@@ -15,9 +15,14 @@ import {HttpClientModule} from "@angular/common/http";
 import { ConverterComponent } from './components/converter/converter.component';
 import { GraphComponent } from './components/graph/graph.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {FormsModule} from "@angular/forms";
-
+import * as _moment from 'moment';
+// @ts-ignore
+import {default as _rollupMoment} from 'moment';
+import {ConverterEffects} from "./store/effects/converter.effects";
+const moment = _rollupMoment || _moment;
 const CUSTOM_DATE_FORMATS = {
   parse: {
     dateInput: 'YYYY-MM-DD',
@@ -51,13 +56,15 @@ const CUSTOM_DATE_FORMATS = {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([ConverterEffects]),
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    MatMomentDateModule
   ],
   providers: [
-    {provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS},
+    {provide: DateAdapter, useClass: MomentDateAdapter},
   ],
   bootstrap: [AppComponent]
 })

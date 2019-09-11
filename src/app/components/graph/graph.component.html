@@ -5,7 +5,7 @@
   <mat-datepicker #pickerFrom></mat-datepicker>
 </mat-form-field>
 <mat-form-field>
-  <input matInput [matDatepicker]="pickerTo" placeholder="Date to">
+  <input matInput [matDatepicker]="pickerTo" [value]="dateTo" placeholder="Date to">
   <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
   <mat-datepicker #pickerTo></mat-datepicker>
 </mat-form-field>

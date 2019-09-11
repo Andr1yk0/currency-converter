@@ -4,12 +4,14 @@ export interface ConverterState {
   currencyFrom: Currency,
   currencyTo: Currency,
   amount: number,
-  latestDate: string
+  latestDate: string,
+  result: number
 }
 
 export const initialConverterState: ConverterState = {
-  currencyFrom: {code: 'USD'},
-  currencyTo: {code: 'GBP'},
+  currencyFrom: null,
+  currencyTo: null,
   amount: null,
-  latestDate: null
+  latestDate: null,
+  result: null
 };

@@ -45,6 +45,7 @@ export class GraphComponent implements OnInit {
           this.chartLabels = Object.keys(data.rates);
           this.chartLabels.sort();
 
+          this.dateTo = converterState.latestDate;
           this.chartDataLabel = `${converterState.currencyFrom.code}/${converterState.currencyTo.code} rate`;
           this.chartData = [];
           this.chartLabels.forEach((date) => {
@@ -96,7 +97,7 @@ export class GraphComponent implements OnInit {
 
   onDateFromChange(event)
   {
-    console.log(event.value)
+    // console.log(event.value.format('YYYY-MM-DD'))
   }
 
 }

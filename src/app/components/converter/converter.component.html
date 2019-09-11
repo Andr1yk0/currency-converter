@@ -15,11 +15,11 @@
     </button>
   </div>
   <mat-form-field>
-      <mat-select placeholder="Currency to" [value]="currencyTo$|async" (selectionChange)="onSelectCurrencyTo($event)">
-        <mat-option *ngFor="let currency of currencies" [value]="currency">{{currency.code}}</mat-option>
+    <mat-select placeholder="Currency to" [value]="currencyTo$|async" (selectionChange)="onSelectCurrencyTo($event)">
+      <mat-option *ngFor="let currency of currencies" [value]="currency">{{currency.code}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <input disabled placeholder="Amount" [value]="result" matInput>
+    <input disabled placeholder="Amount" [value]="result|async" matInput>
   </mat-form-field>
 </div>

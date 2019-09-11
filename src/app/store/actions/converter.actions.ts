@@ -1,36 +1,49 @@
-import {Action} from "@ngrx/store";
+import {createAction, props} from "@ngrx/store";
 import {Currency} from "../../models/currency.model";
+import {RatesResponse} from "../../models/rates-response.interface";
 
 export enum EConverterActions {
   SetCurrencyFrom = '[Converter] Set CurrencyFrom',
   SetCurrencyTo = '[Converter] Set CurrencyTo',
   SetAmount = '[Converter] Set Amount',
-  SwitchCurrencies = '[Converter] Switch Currencies'
+  SetLatestDate = '[Converter] Set Latest Date',
+  SwitchCurrencies = '[Converter] Switch Currencies',
+  LoadRates = '[Converter] Load Currency rates'
 }
 
-export class SetCurrencyFrom implements Action {
-  public readonly type = EConverterActions.SetCurrencyFrom;
+export const setCurrencyFrom = createAction(
+  '[Converter] Set CurrencyFrom',
+  props<{currency: Currency}>()
+);
 
-  constructor(public payload: Currency) {
-  }
-}
+export const setCurrencyTo = createAction(
+  '[Converter] Set CurrencyTo',
+  props<{currency: Currency}>()
+);
 
-export class SetCurrencyTo implements Action {
-  public readonly type = EConverterActions.SetCurrencyTo;
+export const setAmount = createAction(
+  '[Converter] Set Amount',
+  props<{ amount: number }>()
+);
 
-  constructor(public payload: Currency) {
-  }
-}
+export const switchCurrencies = createAction(
+  '[Converter] Switch Currencies'
+);
 
-export class SetAmount implements Action {
-  public readonly type = EConverterActions.SetAmount;
+export const setLatestDate = createAction(
+  '[Converter] Set Latest Date',
+  props<{ date: string }>()
+);
 
-  constructor(public payload: number) {
-  }
-}
+export const loadRates = createAction(
+  '[Converter] Load Currency rates'
+);
 
-export class SwitchCurrencies implements Action{
-  public readonly type = EConverterActions.SwitchCurrencies
-}
+export const calculateResult = createAction(
+  '[Converter] Calculate Result',
+  props<{ ratesResp: RatesResponse }>()
+);
 
-export type ConverterActions = SetCurrencyFrom | SetCurrencyTo | SetAmount | SwitchCurrencies;
+export const resetResult = createAction(
+  '[Converter] Reset result'
+);
