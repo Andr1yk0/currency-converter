@@ -1,7 +1,11 @@
 export interface GraphState {
-  data: Array<any>
+  ratesHistory: Object,
+  dateFrom: string,
+  dateTo: string
 }
 
 export const initialGraphState: GraphState = {
-  data: []
+  ratesHistory: null,
+  dateFrom: null,
+  dateTo: null
 };

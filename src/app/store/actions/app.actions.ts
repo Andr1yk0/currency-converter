@@ -1,19 +1,12 @@
-import {Action} from "@ngrx/store";
+import {createAction, props} from "@ngrx/store";
 
-export enum EAppActions {
-  SetError = '[App] Set Error',
-  DeleteError = '[App] Delete Error'
-}
+export const setError = createAction(
+  '[App] Set Error',
+  props<{error: string}>()
+);
 
-export class SetError implements Action{
-  public readonly type = EAppActions.SetError;
+export const deleteError = createAction(
+  '[App] Delete Error',
+);
 
-  constructor(public payload: string){
-  }
-}
 
-export class DeleteError {
-  public readonly type = EAppActions.DeleteError;
-}
-
-export type AppActions = SetError | DeleteError;

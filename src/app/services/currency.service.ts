@@ -15,8 +15,8 @@ export class CurrencyService {
     return this.http.get(`${this.url}latest?symbols=${currencyTo.code}&base=${currencyFrom.code}`)
   }
 
-  getHistory(currencyFrom: Currency, currencyTo: Currency) {
-    return this.http.get(`${this.url}history?start_at=2018-01-01&end_at=2018-09-01&base=${currencyFrom.code}&symbols=${currencyTo.code}`)
+  getHistory(currencyFrom: Currency, currencyTo: Currency, dateFrom: string, dateTo:string) {
+    return this.http.get(`${this.url}history?start_at=${dateFrom}&end_at=${dateTo}&base=${currencyFrom.code}&symbols=${currencyTo.code}`)
   }
 
 }

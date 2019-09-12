@@ -3,7 +3,7 @@ import {createReducer, on} from "@ngrx/store";
 import {
   calculateResult, resetResult,
   setAmount,
-  setCurrencyFrom, setCurrencyTo, setLatestDate, switchCurrencies
+  setCurrencyFrom, setCurrencyTo, storeRates, switchCurrencies
 } from "../actions/converter.actions";
 
 
@@ -27,15 +27,11 @@ export const converterReducers = createReducer(
     currencyFrom: state.currencyTo,
     currencyTo: state.currencyFrom
   })),
-  on(setLatestDate, (state, {date}) => ({
-    ...state,
-    latestDate: date
-  })),
-  on(calculateResult, (state, {ratesResp}) => {
+  on(calculateResult, state => {
+      let result = state.rate * state.amount;
       return {
         ...state,
-        result: ratesResp.rates[state.currencyTo.code] * state.amount,
-        latestDate: ratesResp.latestDate
+        result: Math.round(result * 100) / 100,
       }
     }
   ),
@@ -43,6 +39,13 @@ export const converterReducers = createReducer(
     return {
       ...state,
       result: null
+    }
+  }),
+  on(storeRates, (state, {ratesResp}) => {
+    return {
+      ...state,
+      rate: ratesResp.rates[state.currencyTo.code],
+      latestDate: ratesResp.date
     }
   })
 );

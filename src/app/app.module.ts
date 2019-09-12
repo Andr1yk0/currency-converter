@@ -22,10 +22,12 @@ import * as _moment from 'moment';
 // @ts-ignore
 import {default as _rollupMoment} from 'moment';
 import {ConverterEffects} from "./store/effects/converter.effects";
+import {GraphEffects} from "./store/effects/graph.effects";
+import {environment} from "../environments/environment";
 const moment = _rollupMoment || _moment;
 const CUSTOM_DATE_FORMATS = {
   parse: {
-    dateInput: 'YYYY-MM-DD',
+    dateInput: environment.dateFormat,
   },
   display: {
     dateInput: 'LL',
@@ -56,7 +58,7 @@ const CUSTOM_DATE_FORMATS = {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    EffectsModule.forRoot([ConverterEffects]),
+    EffectsModule.forRoot([ConverterEffects, GraphEffects]),
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,

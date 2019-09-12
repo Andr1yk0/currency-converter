@@ -1,21 +1,19 @@
 import {Injectable} from "@angular/core";
-import {Actions, createEffect, Effect, ofType} from "@ngrx/effects";
+import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {
-  calculateResult,
-  loadRates,
+  calculateResult, loadRates,
   resetResult,
-  setAmount,
-  setCurrencyFrom, setCurrencyTo,
-  switchCurrencies
+  storeRates,
 } from "../actions/converter.actions";
-import {catchError, map, mergeMap, tap, withLatestFrom} from "rxjs/operators";
+import {catchError, concat, map, mergeMap, withLatestFrom} from "rxjs/operators";
 import {CurrencyService} from "../../services/currency.service";
-import {Action, select, Store} from "@ngrx/store";
-import {selectConverterData} from "../selectors/converter.selectors";
+import {select, Store} from "@ngrx/store";
 import {RatesResponse} from "../../models/rates-response.interface";
 import {EMPTY, of} from "rxjs";
 import {AppState} from "../state/app.state";
-import {ConverterState} from "../state/converter.state";
+import {selectConverter} from "../selectors/converter.selectors";
+import {HttpErrorResponse} from "@angular/common/http";
+import {deleteError, setError} from "../actions/app.actions";
 
 
 @Injectable()
@@ -30,20 +28,21 @@ export class ConverterEffects {
 
   loadRates$ = createEffect(() =>
     this.actions.pipe(
-      ofType(
-        loadRates,
-        setCurrencyFrom,
-        setAmount,
-        setCurrencyTo,
-        switchCurrencies
-      ),
-      withLatestFrom(this.store.pipe(select(selectConverterData))),
-      mergeMap((data: { action: never, converterState: ConverterState }) => {
-          if (data[1].amount && data[1].currencyFrom && data[1].currencyTo) {
-            return this.currencyService.latestRates(data[1].currencyFrom, data[1].currencyTo)
+      ofType(loadRates),
+      withLatestFrom(this.store.pipe(select(selectConverter))),
+      mergeMap((data) => {
+          let [action, converterState] = data;
+          if (converterState.currencyFrom && converterState.currencyTo) {
+            return this.currencyService.latestRates(converterState.currencyFrom, converterState.currencyTo)
               .pipe(
-                map((ratesResponse: RatesResponse) => calculateResult({ratesResp: ratesResponse})),
-                catchError(() => EMPTY)
+                mergeMap((ratesResponse: RatesResponse) =>
+                  [
+                    storeRates({ratesResp: ratesResponse}),
+                    calculateResult(),
+                    deleteError()
+                  ]
+                ),
+                catchError((err: HttpErrorResponse) => of(setError({error: err.error.error})))
               )
           } else {
             return of(resetResult());
@@ -51,6 +50,6 @@ export class ConverterEffects {
         }
       )
     )
-  )
+  );
 
 }

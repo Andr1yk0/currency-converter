@@ -1,23 +1,38 @@
-<h2>History</h2>
-<mat-form-field>
-  <input matInput [matDatepicker]="pickerFrom" (dateChange)="onDateFromChange($event)" placeholder="Date from">
-  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-  <mat-datepicker #pickerFrom></mat-datepicker>
-</mat-form-field>
-<mat-form-field>
-  <input matInput [matDatepicker]="pickerTo" [value]="dateTo" placeholder="Date to">
-  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-  <mat-datepicker #pickerTo></mat-datepicker>
-</mat-form-field>
-<div class="graph">
-  <div class="graph-message" *ngIf="!chart">
-    <div class="message">
-      <mat-icon color="primary" *ngIf="!isError">info_outline</mat-icon>
-      <mat-icon color="warn" *ngIf="isError">error_outline</mat-icon>
-      <span>{{message}}</span>
-    </div>
-  </div>
+<div class="graph" *ngIf="displayChart">
+  <h2>History</h2>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="pickerFrom"
+      (dateChange)="onDateFromChange($event)"
+      [value]="dateFrom$|async"
+      placeholder="Date from"
+    >
+    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+    <mat-datepicker #pickerFrom></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="pickerTo"
+      (dateChange)="onDateToChange($event)"
+      [min]="dateFromMin$|async"
+      [value]="dateTo$|async" placeholder="Date to">
+    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTo></mat-datepicker>
+  </mat-form-field>
   <div class="chart">
-    <canvas #chartCanvas >{{chart}}</canvas>
+    <canvas #chartCanvas>{{chart}}</canvas>
+  </div>
+</div>
+
+<div class="graph-message" *ngIf="!displayChart">
+  <div class="message" *ngIf="!(error$ | async)">
+    <mat-icon color="primary">info_outline</mat-icon>
+    <span>{{defaultMessage}}</span>
+  </div>
+  <div class="message" *ngIf="error$ | async">
+    <mat-icon color="warn" *ngIf="error$ | async">error_outline</mat-icon>
+    <span>{{error$|async}}</span>
   </div>
 </div>
