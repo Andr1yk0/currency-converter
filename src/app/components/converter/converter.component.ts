@@ -10,7 +10,6 @@ import {
   switchCurrencies,
 } from "../../store/actions/converter.actions";
 import {
-  getCurrencies,
   selectCurrenciesFrom, selectCurrenciesTo,
   selectCurrencyFrom,
   selectCurrencyTo,

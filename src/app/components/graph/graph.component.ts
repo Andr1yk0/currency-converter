@@ -53,9 +53,9 @@ export class GraphComponent implements OnInit, OnDestroy {
           this.store.pipe(select(selectCurrencyTo))
         ),
         filter(
-          (data: Array<Object, Currency, Currency>) => data.every(el => el)
+          (data: [Object, Currency, Currency]) => data.every(el => el != null)
         )
-      ).subscribe((data: Array<Object, Currency, Currency>) => {
+      ).subscribe((data: [Object, Currency, Currency]) => {
         let [ratesHistory, currencyFrom, currencyTo] = data;
         this.chartLabels = Object.keys(ratesHistory);
         this.chartLabels.sort();
