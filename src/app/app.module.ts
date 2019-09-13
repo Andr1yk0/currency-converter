@@ -10,7 +10,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
 import {HttpClientModule} from "@angular/common/http";
 import { ConverterComponent } from './components/converter/converter.component';
 import { GraphComponent } from './components/graph/graph.component';

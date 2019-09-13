@@ -1,12 +1,29 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {TestBed, async} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
+import {provideMockStore} from "@ngrx/store/testing";
+import {initialAppState} from "./store/state/app.state";
+import {createSelector} from "@ngrx/store";
+import {initialConverterState} from "./store/state/converter.state";
+import {StoreMockConfig} from "./store.mock";
 
 describe('AppComponent', () => {
+  const selectConverter = createSelector(
+    ()=>1,
+    state => 1
+  );
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+      ],
+      providers: [
+        // provideMockStore(StoreMockConfig)
+      ]
     }).compileComponents();
   }));
 
@@ -22,10 +39,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('converter');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to converter!');
-  });
 });

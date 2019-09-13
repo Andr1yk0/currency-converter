@@ -1,6 +1,6 @@
 <div class="currency-selects">
   <mat-form-field>
-    <input placeholder="Amount" type="number" matInput (input)="onAmountChange($event)">
+    <input placeholder="Amount" min="0" type="number" matInput (input)="onAmountChange($event)">
   </mat-form-field>
 
   <mat-form-field>
@@ -10,12 +10,14 @@
     </mat-select>
   </mat-form-field>
   <div>
-    <button id="switchBtn" (click)="onCurrencySwitch()" mat-button>
+    <button id="switchBtn" [disabled]="!(currencyFrom$|async) || !(currencyTo$|async)" (click)="onCurrencySwitch()"
+            mat-button>
       <mat-icon>sync_alt</mat-icon>
     </button>
   </div>
   <mat-form-field>
-    <mat-select placeholder="Currency to" id="selectCurrencyTo" [value]="currencyTo$|async" (selectionChange)="onSelectCurrencyTo($event)">
+    <mat-select placeholder="Currency to" id="selectCurrencyTo" [value]="currencyTo$|async"
+                (selectionChange)="onSelectCurrencyTo($event)">
       <mat-option *ngFor="let currency of currenciesTo$ | async" [value]="currency">{{currency.code}}</mat-option>
     </mat-select>
   </mat-form-field>

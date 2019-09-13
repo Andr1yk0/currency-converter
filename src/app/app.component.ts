@@ -10,8 +10,6 @@ import {CurrencyService} from "./services/currency.service";
 })
 export class AppComponent implements OnInit {
   title = 'converter';
-  constructor(private store: Store<AppState>, private currencyService: CurrencyService) {
-  }
 
   ngOnInit(): void {
 
