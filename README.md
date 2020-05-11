@@ -1,6 +1,6 @@
-# Converter
+# Currency converter with graph and history
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+See result here [Converter](https://currency-convert-36fbe.firebaseapp.com)
 
 ## Development server
 
